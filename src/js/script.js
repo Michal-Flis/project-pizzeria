@@ -58,7 +58,8 @@
 
       thisProduct.id = id;
       thisProduct.data = data;
-      thisProduct.renderInMenu();
+      
+      thisProduct.randerInMenu();
 
       console.log('new Product', thisProduct);
     }
@@ -67,7 +68,7 @@
       const thisProduct = this;
       const generatedHTML = templates.menuProduct(thisProduct.data);
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-      const menuContainer = document.guerySelector(select.containerOf.menu);
+      const menuContainer = document.querySelector(select.containerOf.menu);
       menuContainer.appendChild(thisProduct.element);
 
     }
@@ -75,7 +76,7 @@
   const app = {
     initMenu: function(){
       const thisApp = this;
-
+    
       console.log('thisApp.data:', thisApp.data);
 
       for(let productData in thisApp.data.products){
@@ -84,7 +85,6 @@
     },
     initData: function(){
       const thisApp = this;
-      console.log('thisApp.data:', thisApp.data);
       thisApp.data = dataSource;
     },
     init: function(){
@@ -98,7 +98,6 @@
       thisApp.initMenu();
     },
   };
-  app.initMenu();
 
   app.init();
 }
