@@ -60,7 +60,10 @@
       thisProduct.data = data;
 
       thisProduct.randerInMenu();
+      thisProduct.getElements();
       thisProduct.initAccordian();
+      thisProduct.initOrderFrom();
+      thisProduct.processOrder();
 
       // console.log('new Product', thisProduct);
     }
@@ -77,13 +80,25 @@
       menuContainer.appendChild(thisProduct.element);
 
     }
+
+    getElements() {
+      const thisProduct = this;
+
+      thisProduct.accordianTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.from = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.fromInput = thisProduct.from.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+
+
+    }
     initAccordian() {
       const thisProduct = this;
 
       /* find the clickable trigger (the element that should react to clicking) */
-      const clickableTrigger = document.querySelector(select.menuProduct.clickable);
+      // const clickableTrigger = document.querySelector(select.menuProduct.clickable);
       /* START: add event listener to clickable trigger on event click */
-      clickableTrigger.addEventListener('click', function (event) {
+      thisProduct.accordianTrigger.addEventListner('click', function (event) {
         /* prevent default action for event */
         event.preventDefault();
         /* find active product (product that has active class) */
@@ -97,6 +112,15 @@
       });
     }
 
+    initOrderFrom() {
+      const thisProduct = this;
+      console.log('thisProduct', thisProduct);
+    }
+
+    processOrder() {
+      const thisProduct = this;
+      console.log('thisProduct', thisProduct);
+    }
   }
   const app = {
     initMenu: function () {
