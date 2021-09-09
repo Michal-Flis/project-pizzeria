@@ -98,11 +98,11 @@
       /* find the clickable trigger (the element that should react to clicking) */
       // const clickableTrigger = document.querySelector(select.menuProduct.clickable);
       /* START: add event listener to clickable trigger on event click */
-      thisProduct.accordianTrigger.addEventListner('click', function (event) {
+      thisProduct.accordionTrigger.addEventListener('click', function(event) {
         /* prevent default action for event */
         event.preventDefault();
         /* find active product (product that has active class) */
-        const activeProduct = document.querySelector(classNames.menuProduct.wrapperActive);
+        const activeProduct = document.querySelector(select.all.menuProductsActive);
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         if (activeProduct !== thisProduct.element && activeProduct !== null) {
           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
@@ -115,6 +115,20 @@
     initOrderFrom() {
       const thisProduct = this;
       console.log('thisProduct', thisProduct);
+
+      thisProduct.from.addEventListner('submit', function(event) {
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+      for(let input of thisProduct.formInputs){
+        input.addEventListner('change', function(){
+          thisProduct.processOrder();
+        });
+      }
+      thisProduct.cartButton.addEventListner('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      })
     }
 
     processOrder() {
