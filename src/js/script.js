@@ -63,8 +63,9 @@
       thisProduct.getElements();
       thisProduct.initAccordian();
       thisProduct.initOrderFrom();
-      thisProduct.processOrder();
       thisProduct.initAmountWidget();
+      thisProduct.processOrder();
+
 
     }
 
@@ -170,6 +171,8 @@
           }
         }
       }
+      thisProduct.priceSingle = price;
+      price *= thisProduct.amountWidget.value;
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
     }
@@ -177,6 +180,9 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('update', function () {
+        thisProduct.processOrder();
+      });
     }
   }
   const app = {
@@ -207,6 +213,7 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
+      thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
 
       console.log('AmountWidget:', thisWidget);
@@ -229,12 +236,15 @@
       /*TODO: Add validation*/
       if (thisWidget.value !== newValue && !isNaN(newValue) >= settings.amountWidget.defaultMin <= settings.amountWidget.defaultMax) {
         thisWidget.value = newValue;
+        thisWidget.announce(); //Chyba tutaj powinien zostać wstawiony, ale nie mam pewności
       }
       thisWidget.value = newValue;
       thisWidget.input.value = thisWidget.value;
     }
     initActions() {
       const thisWidget = this;
+
+
 
       thisWidget.input.addEventListener('change', function () {
         thisWidget.setValue(thisWidget.input.value);
@@ -249,6 +259,12 @@
         event.preventDefault();
         thisWidget.setValue(thisWidget.input.value + 1);
       });
+    }
+    announce() {
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
     }
   }
   app.init();
