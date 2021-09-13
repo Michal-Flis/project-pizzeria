@@ -382,6 +382,33 @@
         const generatedHTML = templates.cartProduct(menuProduct);
         const generatedDOM = utils.createDOMFromHTML(generatedHTML);
         thisCart.dom.productList.appendChild(generatedDOM);
+
+        thisCart.products.push(menuProduct);
+        console.log('thisCart.products: ', thisCart.products);
+      }
+    }
+    class CartProduct{
+      constructor(menuProduct, element){
+        thisCartProduct = this;
+
+        thisCartProduct.id = menuProduct.id;
+        thisCartProduct.name = menuProduct.name;
+        thisCartProduct.amount = menuProduct.amount;
+        thisCartProduct.priceSingle = menuProduct.priceSingle;
+        thisCartProduct.price = menuProduct.priceSingle * menuProduct.amount;
+        thisCartProduct.params = menuProduct.params;
+
+        thisCartProduct.getElements(element);
+      }
+      getElements(element){
+        thisCartProduct = this;
+
+        thisCartProduct.dom = {};
+        thisCartProduct.dom.wrapper = element;
+        thisCartProduct.amountWidget = element.querySelector(select.cartProduct.amountWidget);
+        thisCartProduct.price = element.querySelector(select.cartProduct.price);
+        thisCartProduct.edit = element.querySelector(select.cartProduct.edit);
+        thisCartProduct.remove = element.querySelector(select.cartProduct.remove);
       }
     }
     app.init();
