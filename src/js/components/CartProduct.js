@@ -1,13 +1,13 @@
 import {
   select
-} from "../settings";
-import AmountWidget from "./AmountWidget.js"
+} from '../settings.js';
+import AmountWidget from './AmountWidget.js';
 
 
 
 class CartProduct {
   constructor(menuProduct, element) {
-    thisCartProduct = this;
+    const thisCartProduct = this;
 
     thisCartProduct.id = menuProduct.id;
     thisCartProduct.name = menuProduct.name;
@@ -21,7 +21,7 @@ class CartProduct {
     thisCartProduct.initActions();
   }
   getElements(element) {
-    thisCartProduct = this;
+    const thisCartProduct = this;
 
     thisCartProduct.dom = {};
     thisCartProduct.dom.wrapper = element;
@@ -42,6 +42,7 @@ class CartProduct {
   }
   remove() {
     const thisCartProduct = this;
+    
     const event = new CustomEvent('remove', {
       bubbles: true,
       detail: {
@@ -52,6 +53,8 @@ class CartProduct {
     thisCartProduct.dom.wrapper.dispatchEvent(event);
   }
   initActions() {
+    const thisCartProduct = this;
+
     thisCartProduct.dom.edit.addEventListener('click', function (event) {
       event.preventDefault();
     });
@@ -74,3 +77,5 @@ class CartProduct {
     return products;
   }
 }
+
+export default CartProduct;

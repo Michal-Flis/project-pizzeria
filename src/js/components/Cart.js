@@ -3,11 +3,11 @@ import {
   select,
   classNames,
   templates
-} from '../settings.js'
+} from '../settings.js';
 import {
   utils
-} from '../utils.js'
-import CartProduct from './CartProduct.js'
+} from '../utils.js';
+import CartProduct from './CartProduct.js';
 
 
 
@@ -39,6 +39,7 @@ class Cart {
     thisCart.dom.phone = element.querySelector(select.cart.phone);
     thisCart.dom.address = element.querySelector(select.cart.address);
   }
+
   initActions() {
     const thisCart = this;
 
@@ -58,6 +59,37 @@ class Cart {
       thisCart.sendOrder();
     });
   }
+
+  sendOrder() {
+    const thisCart = this;
+
+    const url = settings.db.url + '/' + settings.db.orders;
+
+    const payload = {
+      address: thisCart.dom.address.value,
+      phone: thisCart.dom.phone.value,
+      totalPrice: thisCart.dom.totalPrice,
+      subtotalPrice: thisCart.dom.subtotalPrice,
+      totalNumber: thisCart.dom.totalNumber,
+      deliveryFee: thisCart.dom.deliveryFee,
+      products: [],
+    };
+
+    for (let prod of thisCart.products) {
+      payload.products.push(prod.getData());
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options);
+  }
+
   add(menuProduct) {
     const thisCart = this;
 
@@ -70,6 +102,7 @@ class Cart {
 
     thisCart.update();
   }
+
   update() {
     const thisCart = this;
 
@@ -93,6 +126,7 @@ class Cart {
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
     thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
   }
+
   remove(cartProduct) {
     const thisCart = this;
 
@@ -101,35 +135,6 @@ class Cart {
     cartProduct.dom.wrapper.remove();
 
     thisCart.update();
-  }
-  sendOrder() {
-    thisCart = this;
-
-    const url = settings.db.url + '/' + settings.db.orders;
-
-    const payload = {
-      address: thisCart.dom.address.value,
-      phone: thisCart.dom.phone.value,
-      totalPrice: thisCart.dom.totalPrice,
-      subtotalPrice: thisCart.dom.subtotalPrice,
-      totalNumber: thisCart.dom.totalNumber,
-      deliveryFee: thisCart.dom.deliveryFee,
-      products: [],
-    };
-
-    for (let prod of thisCart.products) {
-      payload.products.push(prod.getData());
-    }
-
-    const option = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    };
-
-    fetch(url, options);
   }
 }
 
