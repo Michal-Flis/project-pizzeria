@@ -53,18 +53,19 @@ export const app = {
     // add class "active" to matching pages, remove from non-matching
     for (let page of thisApp.pages) {
       // console.log('aaa: ', page);
-      page.clasList.toggle(
+      page.classList.toggle(
         classNames.pages.active,
         page.id == pageId
       );
-      // console.log('aaa', page.id);
+      // console.log(pageId);
     }
     // add class "active" to matching links, remove from non-matching
     for (let link of thisApp.navLinks) {
-      link.clasList.toggle(
+      link.classList.toggle(
         classNames.nav.active,
         link.getAttribute('href') == '#' + pageId
       );
+      // console.log(link);
     }
   },
 
@@ -84,7 +85,7 @@ export const app = {
         return rawResponse.json();
       })
       .then(function (parsedResponse) {
-        console.log('parsedResponse', parsedResponse);
+        // console.log('parsedResponse', parsedResponse);
 
         // save parsedResponse as thisApp.data.products
         thisApp.data.products = parsedResponse;

@@ -9,11 +9,10 @@ class AmountWidget {
     const thisWidget = this;
 
     thisWidget.getElements(element);
-    thisWidget.value = settings.amountWidget.defaultValue;
-    thisWidget.setValue(thisWidget.input.value);
+    // thisWidget.value = settings.amountWidget.defaultValue;
+    thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue);
 
-    console.log('AmountWidget:', thisWidget);
-    console.log('constructor arguments:', element);
+    thisWidget.initActions();
   }
   getElements(element) {
     const thisWidget = this;
@@ -30,11 +29,10 @@ class AmountWidget {
     const newValue = parseInt(value);
 
     /*TODO: Add validation*/
-    if (thisWidget.value !== newValue && !isNaN(newValue) >= settings.amountWidget.defaultMin <= settings.amountWidget.defaultMax) {
+    if (thisWidget.value !== newValue && !isNaN(newValue) && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax) {
       thisWidget.value = newValue;
-      thisWidget.announce(); //Chyba tutaj powinien zostać wstawiony, ale nie mam pewności
+      thisWidget.announce();
     }
-    thisWidget.value = newValue;
     thisWidget.input.value = thisWidget.value;
   }
   initActions() {
@@ -45,13 +43,11 @@ class AmountWidget {
     thisWidget.input.addEventListener('change', function () {
       thisWidget.setValue(thisWidget.input.value);
     });
-
-    thisWidget.linkDecrease('click', function (event) {
+    thisWidget.linkDecrease.addEventListener('click', function (event) {
       event.preventDefault();
       thisWidget.setValue(thisWidget.value - 1);
     });
-
-    thisWidget.linkIncrease('click', function (event) {
+    thisWidget.linkIncrease.addEventListener('click', function (event) {
       event.preventDefault();
       thisWidget.setValue(thisWidget.input.value + 1);
     });
