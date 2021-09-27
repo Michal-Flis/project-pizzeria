@@ -5,6 +5,8 @@ import {
 } from "./settings.js";
 import Product from "./components/Product.js";
 import Cart from "./components/Cart.js";
+import Booking from "./components/Booking.js";
+
 
 const app = {
   initPages: function(){
@@ -88,13 +90,6 @@ for(let page of thisApp.pages){
       });
     thisApp.data = {};
   },
-  init: function () {
-    const thisApp = this;
-
-    thisApp.initPages();
-    thisApp.initData();
-    thisApp.initCart();
-  },
   initCart: function () {
     const thisApp = this;
 
@@ -106,6 +101,21 @@ for(let page of thisApp.pages){
     thisApp.productList.addEventListener('add-to-cart', function (event) {
       app.cart.add(event.detail.product);
     });
+  },
+  initBooking: function(){
+    const thisApp = this;
+
+    thisApp.bookingContainer = document.querySelector(select.containerOf.booking);
+
+    thisApp.booking = new Booking(thisApp.bookingContainer);
+  },
+  init: function () {
+    const thisApp = this;
+
+    thisApp.initPages();
+    thisApp.initData();
+    thisApp.initCart();
+    thisApp.initBooking();
   },
 };
 app.init();
