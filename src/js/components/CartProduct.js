@@ -12,8 +12,9 @@ class CartProduct {
     thisCartProduct.id = menuProduct.id;
     thisCartProduct.name = menuProduct.name;
     thisCartProduct.amount = menuProduct.amount;
+    thisCartProduct.price = menuProduct.price;
+    console.log(menuProduct.price);
     thisCartProduct.priceSingle = menuProduct.priceSingle;
-    thisCartProduct.price = menuProduct.priceSingle * menuProduct.amount;
     thisCartProduct.params = menuProduct.params;
 
     thisCartProduct.getElements(element);
@@ -24,17 +25,20 @@ class CartProduct {
     const thisCartProduct = this;
 
     thisCartProduct.dom = {};
+
     thisCartProduct.dom.wrapper = element;
-    thisCartProduct.amountWidget = element.querySelector(select.cartProduct.amountWidget);
-    thisCartProduct.price = element.querySelector(select.cartProduct.price);
-    thisCartProduct.edit = element.querySelector(select.cartProduct.edit);
-    thisCartProduct.remove = element.querySelector(select.cartProduct.remove);
+    thisCartProduct.dom.amountWidget = element.querySelector(select.cartProduct.amountWidget);
+    thisCartProduct.dom.price = element.querySelector(select.cartProduct.price);
+    thisCartProduct.dom.edit = element.querySelector(select.cartProduct.edit);
+    thisCartProduct.dom.remove = element.querySelector(select.cartProduct.remove);
   }
   initAmountWidget() {
     const thisCartProduct = this;
 
-    thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidgetElem);
-    thisCartProduct.dom.amountWidgetElem.addEventListener('update', function () {
+    thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+    thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+
+    thisCartProduct.dom.amountWidget.addEventListener('updated', function () {
       thisCartProduct.amount = thisCartProduct.amountWidget.value;
       thisCartProduct.price = thisCartProduct.amount * thisCartProduct.priceSingle;
       thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
@@ -66,7 +70,7 @@ class CartProduct {
   getData() {
     const thisCartProduct = this;
 
-    const products = {
+    const productSummary = {
       id: thisCartProduct.id,
       amount: thisCartProduct.amount,
       price: thisCartProduct.price,
@@ -74,7 +78,7 @@ class CartProduct {
       name: thisCartProduct.name,
       params: thisCartProduct.params,
     };
-    return products;
+    return productSummary;
   }
 }
 

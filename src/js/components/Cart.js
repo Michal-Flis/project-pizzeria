@@ -20,7 +20,6 @@ class Cart {
     thisCart.getElements(element);
     thisCart.initActions();
 
-    // console.log('new Cart', thisCart);
   }
 
   getElements(element) {
@@ -33,7 +32,7 @@ class Cart {
     thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
     thisCart.dom.deliveryFee = thisCart.dom.wrapper.querySelector(select.cart.deliveryFee);
     thisCart.dom.subtotalPrice = thisCart.dom.wrapper.querySelector(select.cart.subtotalPrice);
-    thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelector(select.cart.totalPrice);
+    thisCart.dom.totalPrice = thisCart.dom.wrapper.querySelectorAll(select.cart.totalPrice);
     thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(select.cart.totalNumber);
     thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
     thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
@@ -68,7 +67,6 @@ class Cart {
     thisCart.dom.productList.appendChild(generatedDOM);
 
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-    console.log('thisCart.products: ', thisCart.products);
 
     thisCart.update();
   }
@@ -81,16 +79,22 @@ class Cart {
     thisCart.subtotalPrice = 0;
     for (let product of thisCart.products) {
       thisCart.totalNumber += product.amount;
+      console.log(product.amount);
+      console.log(thisCart.totalNumber);
       thisCart.subtotalPrice += product.price;
+      console.log(thisCart.subtotalPrice);
     }
     if (thisCart.totalNumber !== 0) {
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+      console.log(thisCart.totalPrice);
     } else {
       thisCart.subtotalPrice = 0;
       thisCart.deliveryFee = 0;
+      thisCart.totalPrice = 0;
     }
     for (let price of thisCart.dom.totalPrice) {
       price.innerHTML = thisCart.totalPrice;
+      console.log(price);
     }
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
@@ -115,10 +119,10 @@ class Cart {
     const payload = {
       address: thisCart.dom.address.value,
       phone: thisCart.dom.phone.value,
-      totalPrice: thisCart.dom.totalPrice,
-      subtotalPrice: thisCart.dom.subtotalPrice,
-      totalNumber: thisCart.dom.totalNumber,
-      deliveryFee: thisCart.dom.deliveryFee,
+      totalPrice: thisCart.totalPrice,
+      subtotalPrice: thisCart.subtotalPrice,
+      totalNumber: thisCart.totalNumber,
+      deliveryFee: thisCart.deliveryFee,
       products: [],
     };
 

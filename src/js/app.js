@@ -17,14 +17,12 @@ export const app = {
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
 
     const idFromHash = window.location.hash.replace('#/', '');
-    // console.log(idFromHash);
 
     let pageMatchingHash = thisApp.pages[0].id;
 
     for (let page of thisApp.pages) {
       if (page.id == idFromHash) {
         pageMatchingHash = page.id;
-        // console.log(pageMatchingHash);
         break;
       }
     }
@@ -52,12 +50,10 @@ export const app = {
 
     // add class "active" to matching pages, remove from non-matching
     for (let page of thisApp.pages) {
-      // console.log('aaa: ', page);
       page.classList.toggle(
         classNames.pages.active,
         page.id == pageId
       );
-      // console.log(pageId);
     }
     // add class "active" to matching links, remove from non-matching
     for (let link of thisApp.navLinks) {
@@ -65,7 +61,6 @@ export const app = {
         classNames.nav.active,
         link.getAttribute('href') == '#' + pageId
       );
-      // console.log(link);
     }
   },
 
@@ -85,7 +80,6 @@ export const app = {
         return rawResponse.json();
       })
       .then(function (parsedResponse) {
-        // console.log('parsedResponse', parsedResponse);
 
         // save parsedResponse as thisApp.data.products
         thisApp.data.products = parsedResponse;
@@ -101,7 +95,6 @@ export const app = {
     thisApp.cart = new Cart(cartElem);
 
     thisApp.productList = document.querySelector(select.containerOf.menu);
-
     thisApp.productList.addEventListener('add-to-cart', function (event) {
       app.cart.add(event.detail.product);
     });
@@ -110,7 +103,6 @@ export const app = {
     const thisApp = this;
 
     thisApp.bookingContainer = document.querySelector(select.containerOf.booking);
-
     thisApp.booking = new Booking(thisApp.bookingContainer);
   },
   init: function () {
