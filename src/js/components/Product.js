@@ -146,22 +146,23 @@ class Product {
     const event = new CustomEvent('add-to-cart', {
       bubbles: true,
       detail: {
-        product: thisProduct,
+        product: thisProduct.prepareCartProduct(),
       },
     });
 
     thisProduct.element.dispatchEvent(event);
     // app.cart.add(thisProduct);
   }
+
   prepareCartProduct() {
     const thisProduct = this;
 
     const productSummary = {
       id: thisProduct.id,
-      name: thisProduct.name,
-      amount: thisProduct.amount,
-      priceSingle: thisProduct.priceSingle,
-      price: thisProduct.price,
+      name: thisProduct.data.name,
+      amount: thisProduct.amountWidget.value,
+      priceSingle: thisProduct.data.price,
+      price: thisProduct.priceSingle * thisProduct.amountWidget.value,
       params: thisProduct.prepareCartProductParams()
     };
     return productSummary;
