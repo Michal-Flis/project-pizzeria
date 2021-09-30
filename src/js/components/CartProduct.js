@@ -13,7 +13,6 @@ class CartProduct {
     thisCartProduct.name = menuProduct.name;
     thisCartProduct.amount = menuProduct.amount;
     thisCartProduct.price = menuProduct.price;
-    console.log(menuProduct.price);
     thisCartProduct.priceSingle = menuProduct.priceSingle;
     thisCartProduct.params = menuProduct.params;
 

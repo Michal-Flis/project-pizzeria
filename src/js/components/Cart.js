@@ -79,14 +79,10 @@ class Cart {
     thisCart.subtotalPrice = 0;
     for (let product of thisCart.products) {
       thisCart.totalNumber += product.amount;
-      console.log(product.amount);
-      console.log(thisCart.totalNumber);
       thisCart.subtotalPrice += product.price;
-      console.log(thisCart.subtotalPrice);
     }
     if (thisCart.totalNumber !== 0) {
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
-      console.log(thisCart.totalPrice);
     } else {
       thisCart.subtotalPrice = 0;
       thisCart.deliveryFee = 0;
@@ -94,7 +90,6 @@ class Cart {
     }
     for (let price of thisCart.dom.totalPrice) {
       price.innerHTML = thisCart.totalPrice;
-      console.log(price);
     }
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
