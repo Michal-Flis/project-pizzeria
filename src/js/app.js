@@ -6,6 +6,7 @@ import {
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Home from './components/home.js';
 
 
 export const app = {
@@ -105,6 +106,12 @@ export const app = {
     thisApp.bookingContainer = document.querySelector(select.containerOf.booking);
     thisApp.booking = new Booking(thisApp.bookingContainer);
   },
+  initHome: function(){
+    const thisApp = this;
+
+    thisApp.homeWidget = document.querySelector(select.containerOf.home);
+    thisApp.home = new Home(thisApp.homeWidget);
+  },
   init: function () {
     const thisApp = this;
 
@@ -112,6 +119,7 @@ export const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initHome();
   },
 };
 app.init();

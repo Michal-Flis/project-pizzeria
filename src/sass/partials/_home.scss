@@ -1,12 +1,13 @@
-.home-container {
-  transform: opacity 500ms;
-  
-  &.loading {
-    opacity: 0.25;
-  }
-}
+// .home-wrapper {
+//   transform: opacity 500ms;
 
-.home-wrapper {
+//   &.loading {
+//     opacity: 0.25;
+//   }
+// }
+
+
+.home-container {
   margin: ($base-size * 3.5) auto;
   padding: ($base-size * 6) ($base-size * 4);
   background: $color-light;
@@ -14,62 +15,85 @@
   border-radius: $radius;
 }
 
+
+.options{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  color: $color-light;
+  font-family: $font-header;
+}
+
+
+
 .order-online{
   background-image: url(./../../images/assets/pizza-1.jpg);
-  width: 200px;
-  height: 100px;
-  flex: 50%;
-  margin-right: 20px;
-  text-align: center;
+  width: 310px;
+  height: 130px;
+  flex: 45%;
+  
+  h2,
+  p{
+    color: $color-light;
+  }
 }
 
 .book-table{
   background-image: url(./../../images/assets/pizza-2.jpg);
-  width: 200px;
-  height: 100px;
-  flex: 50%;
-  text-align: center;  
+  width: 310px;
+  height: 130px;
+  flex: 45%;
+
+  h2,
+  p{
+    color: $color-light;
+  }
 }
 
 .opening-hours{
   background-color: #e74c3c;
   flex: 100%;
-  height: 100px;
+  height: 130px;
+
+  h2,
+  h3{
+    margin: 20px;
+  }
+}
+
+.order-online,
+.book-table,
+.opening-hours{
   color: $color-light;
-  text-align: center;
-}
+  margin-top: 7px;
+  margin-right: 10px;
+  border-radius: 5px;
 
-.option{
-  display: flex;
-}
+  h2{
+    margin: 25px;
+  }
 
-.option-text{
-  position: absolute;
-  z-index: 10;
-
-  a{
+  a {
     text-decoration: none;
   }
 
-  h2{
-    font-size: 20px;
-    color: $color-light;
-  }
-
-  p{
-    font-size: 10px;
+  p {
     font-family: $font-text;
-    opacity: 0;
-    color: $color-light;
+    visibility: hidden;
+  }
+}
+
+.order-online:hover,
+.book-table:hover{
+  p{
+    visibility: visible;
+    transform: translateY(-20px);
+    transition: 0.5s linear;
   }
 
-  &:hover{
-    margin-top: -25px;
-    transition: 1s ease-out;
-
-    p{
-      opacity: 1;
-    }
+  h2 {
+    transform: translateY(-15px);
+    transition: 0.5s linear;
   }
 }
 
@@ -77,75 +101,90 @@
   height: 250px;
 }
 
-.carousel.item{
+.carousel-box{
   display: flex;
-  height: 250px;
-  margin-top: 35px;
+  height: 340px;
+  margin-top: 25px;
   width: 100%;
 }
 
-.carousel-img{
-  width: 165px;
-  height: 165px;
+.carousel-image img{
+  width: 180px;
+  height: 180px;
   object-fit: cover;
-  margin-right: 15px;
-  border: none;
+  margin-right: 30px;
+  border-radius: 5px;
 }
 
 .carousel-text{
   h3{
-    margin-bottom: 20px;
+    margin-bottom: -20px;
   }
 
-  p:first-of-type{
+  p {
     font-family: $font-text;
-    font-weight: normal;
-    font-size: 15px;
-    text-align: left;
+    font-weight: $font-light;
+    font-size: 18px;
   }
 }
 
-.gallery{
-  display: flex;
-  margin-top: 50px;
+.gallery {
+  display: block;
   position: relative;
-}
+  margin: 100px auto;
 
-.img{
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-  margin: 5px;
-  border-radius: 5px;
-}
-
-.icons{
-  position: absolute;
-  font-size: 20px;
-  opacity: 0;
-  margin: 60px;
-  
-
-  a{
-    text-decoration: none;
+  .gallery-flex {
+    display: flex;
   }
+
+
+  .icons {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0;
+    margin: 66px;
+
+    a{
+      text-decoration: none;
+    }
+
+    .fa-heart{
+      color: $color-main;
+    }
+
+    .fa-share.alt{
+      color: $color-dark;
+    }
+  }
+
+  img {
+    width: 193px;
+    height: 193px;
+    object-fit: cover;
+    margin: 5px;
+  }
+}
+
+.gallery-element {
+  justify-content: center;
+  display: block;
 
   .fas{
-    color: $color-danger;
     opacity: 0;
   }
 
   &:hover{
     opacity: 0.7;
+    filter: brightness(70&);
     transition: $transition;
 
     .fas{
       opacity: 0.7;
     }
 
-    &:hover{
-      opacity: 1.5;
-    }
+      &:hover{
+        opacity: 1.5;
+      }
   }
 }
 
@@ -158,7 +197,7 @@
   a,
   i{
     margin: 5px;
-    color: $color-danger;
+    color: $color-dark;
   }
 }
 
