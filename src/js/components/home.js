@@ -31,11 +31,19 @@ class Home {
     thisHome.element = document.querySelector(select.home.carousel);
 
     thisHome.flkty = new Flickity(thisHome.element, {
-        cellAlign: "left",
-        contain: true,
-        prevNextButtons: false,
-        autoPlay: true,
+      cellAlign: 'left',
+      contain: true,
+      prevNextButtons: false,
+      autoPlay: true,
     });
   }
+
+  //goPage(){
+  //const thisHome = this;
+
+  //thisHome.dom.order.addEventListener('click', function(){
+        
+  //})
+  //}
 }
 export default Home;

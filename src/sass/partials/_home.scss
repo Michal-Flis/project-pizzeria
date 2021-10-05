@@ -24,8 +24,6 @@
   font-family: $font-header;
 }
 
-
-
 .order-online{
   background-image: url(./../../images/assets/pizza-1.jpg);
   width: 310px;
@@ -180,11 +178,12 @@
 
     .fas{
       opacity: 0.7;
-    }
+    
 
       &:hover{
         opacity: 1.5;
       }
+    }
   }
 }
 
